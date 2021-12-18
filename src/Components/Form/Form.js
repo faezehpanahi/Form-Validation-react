@@ -1,8 +1,12 @@
 import React from "react";
 import useForm from "./useForm";
+import validate from "./validationInfo";
 
-const Form = () => {
-  const { handleChange, values, handleSubmit } = useForm();
+const Form = ({ submitForm }) => {
+  const { handleChange, values, handleSubmit, errors } = useForm(
+    submitForm,
+    validate
+  );
 
   return (
     <div className="form">
@@ -18,10 +22,7 @@ const Form = () => {
             value={values.username}
             onChange={handleChange}
           />
-          {/* <span
-            id="span-username"
-            onChange={context.handleUserValidation}
-          ></span> */}
+          {errors.username && <p>{errors.username}</p>}
         </div>
 
         <div className="form-inputs">
@@ -35,7 +36,7 @@ const Form = () => {
             value={values.email}
             onChange={handleChange}
           />
-          {/* <span id="span-email"></span> */}
+          <p>{errors.email}</p>
         </div>
 
         <div className="form-inputs">
@@ -49,7 +50,7 @@ const Form = () => {
             value={values.password}
             onChange={handleChange}
           />
-          {/* <span id="span-pass"></span> */}
+          <p>{errors.password}</p>
           {/* <div className="form__checkbox">
           <input type="checkbox" onclick="show_password()" />
           Show Password
@@ -67,7 +68,7 @@ const Form = () => {
             value={values.password2}
             onChange={handleChange}
           />
-          {/* <span id="span-pass-repeat"></span> */}
+          <p>{errors.password2}</p>
           {/* <div className="form__checkbox">
           <input type="checkbox" onclick="show_password_confirm()" />
           Show Password

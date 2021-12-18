@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "./Components/Form/Form";
 import Header from "./Components/Header/Header";
-// import FramWork from "./Components/FramWork/FramWork";
+import FormSuccess from "./Components/Form/FormSuccess";
 
 function App() {
+  const [isSubmited, setIsSubmited] = useState(false);
+
+  function submitForm() {
+    setIsSubmited(true);
+  }
+
   return (
     <div className="App">
       <Header />
-      <Form />
+      {!isSubmited ? <Form submitForm={submitForm} /> : <FormSuccess />}
     </div>
   );
 }
